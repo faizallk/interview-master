@@ -13,6 +13,9 @@ const registerUserController = async (req, res) => {
     return res.status(400).json({ error: "All fields are required" });
   }
 
+   if(password.length < 6){
+    return res.status(400).json({error: "Password must be 6 characters"})
+    }
   //check if user already exists
   try {
     const isUser = await userModel.findOne({ $or: [{ username }, { email }] }); // this will chekc for multiple conditions, if either username or email already exists, it will return the user
@@ -23,7 +26,8 @@ const registerUserController = async (req, res) => {
         .status(400)
         .json({ error: "User already exists with username or email" });
     }
-
+   
+   
     //hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
