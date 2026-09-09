@@ -4,7 +4,7 @@ import { Button } from '@base-ui/react';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 export default function Register() {
   const {loading, handleRegister} = useAuth()
   const navigate = useNavigate()

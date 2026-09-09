@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../auth.context";
 import {
   login,
@@ -11,6 +11,7 @@ export const useAuth = () => {
   const context = useContext(AuthContext);
   const { user, setUser, loading, setLoading } = context;
 
+  //Register API
   const handleRegister = async ({ username, email, password }) => {
     setLoading(true);
     try {
@@ -24,6 +25,7 @@ export const useAuth = () => {
     }
   };
 
+  //Handle Login
   const handleLogin = async ({ email, password }) => {
     setLoading(true);
     try {
@@ -37,6 +39,7 @@ export const useAuth = () => {
     }
   };
 
+  //handle current user data
   const handleGetMe = async () => {
     setLoading(true);
     try {
@@ -46,10 +49,10 @@ export const useAuth = () => {
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false);
+      setLoading(false);  
     }
   };
-
+//handle logout
   const handleLogout = async () => {
     setLoading(true);
     try {
@@ -62,7 +65,7 @@ export const useAuth = () => {
       setLoading(false);
     }
   };
-
+//handle change password
   const handleChangePassword = async ({ oldPassword, newPassword }) => {
     setLoading(true);
     try {
@@ -75,6 +78,7 @@ export const useAuth = () => {
     }
   };
 
+  
   return {
     user,
     loading,

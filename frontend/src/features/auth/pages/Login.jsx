@@ -13,11 +13,10 @@ export default function Login() {
     password: '',
   });
 
-  const handleSubmit =  (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleLogin(formData)
-    navigate("/")
-
+    await handleLogin(formData);
+    navigate("/");
   };
 
   return (

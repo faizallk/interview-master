@@ -2,7 +2,7 @@ import axios from "axios";
 
 //creating instance
 export const api = axios.create({
-    baseURL: "http://localhost:3000",
+    baseURL:  "http://localhost:3000",
     withCredentials: true
 })
 
@@ -42,6 +42,7 @@ export async function getCurrentUser(){
     try{
         const response = await api.get("/api/auth/get-me");
         return response.data;
+        
     } catch (err){
         console.log(err)
     }
