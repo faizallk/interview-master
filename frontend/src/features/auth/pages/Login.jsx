@@ -1,19 +1,23 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@base-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 export default function Login() {
+ const {loading , handleLogin } = useAuth()
+ const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
-    
-    // Handle login submission
+    handleLogin(formData)
+    navigate("/")
+
   };
 
   return (
@@ -56,9 +60,10 @@ export default function Login() {
 
           <Button
             type="submit"
+            disabled={loading && true}
             className="w-full mt-2 py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
           >
-            Log In
+           {loading ? "Loging..." : 'Log In'}
           </Button>
         </form>
         <p className='text-slate-700 text-center text-sm my-3'>Don't have account? <Link className='text-blue-600 font-medium' to={'/register'}>Register</Link></p>

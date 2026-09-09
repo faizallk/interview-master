@@ -3,7 +3,10 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@base-ui/react';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 export default function Register() {
+  const {loading, handleRegister} = useAuth()
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     username:'',
@@ -13,8 +16,8 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Handle login submission
+    handleRegister(formData)
+    navigate("/")
   };
 
   return (
@@ -33,8 +36,8 @@ export default function Register() {
               id="username"
               type="text"
               required
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              value={formData.username}
+              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
               placeholder="Username"
               className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm text-slate-800 transition-colors"
             />
@@ -71,9 +74,10 @@ export default function Register() {
 
           <Button
             type="submit"
+            disabled={loading}
             className="w-full mt-2 py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
           >
-            Register
+            {loading ? 'Loading...' : 'Register'}
           </Button>
         </form>
         <p className='text-slate-700 text-center text-sm my-3'>Already have an account? <Link className='text-blue-600 font-medium' to={'/login'}>Login</Link></p>
