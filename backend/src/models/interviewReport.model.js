@@ -38,7 +38,7 @@ const behaviorQuestions = new mongoose.Schema({
 })
 // Sub Schema for the Skill gaps
 const skillGapSchema = new mongoose.Schema({
-    skills: {
+    skill: {
         type: String,
         required: [true, "Skills is required"]
     },
@@ -63,7 +63,7 @@ const preprationPlan = new mongoose.Schema({
         type: Number,
         required: [true, "Day is required"]
     },
-    task: [{
+    tasks: [{
         type: String,
         required: [true, "Task is required"]
     }],
@@ -89,9 +89,9 @@ const InterveiwReport = new mongoose.Schema({
     },
     matchScore: Number,
     technicalQuestions: [technicalQuestions],
-    behaviorQuestions: [behaviorQuestions],
-    skillGapSchema: [skillGapSchema],
-    preprationPlan: [preprationPlan],
+    behavioralQuestions: [behaviorQuestions],
+    skillGaps: [skillGapSchema],
+    preparationPlan: [preprationPlan],
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "users",
