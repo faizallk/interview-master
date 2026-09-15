@@ -1,4 +1,4 @@
-import mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 
 // Sub Schema for the technical questions
@@ -8,7 +8,7 @@ const technicalQuestions = new mongoose.Schema({
         required: [true, "Question is required"]
     },
     intention: {
-        type: Stirng,
+        type: String,
         required: [true, "Intention is required"]
     },
     answer: {
@@ -26,7 +26,7 @@ const behaviorQuestions = new mongoose.Schema({
         required: [true, "Question is required"]
     },
     intention: {
-        type: Stirng,
+        type: String,
         required: [true, "Intention is required"]
     },
     answer: {
@@ -49,7 +49,7 @@ const skillGapSchema = new mongoose.Schema({
             "Medium",
             "High"
         ],
-        default: "Medium"
+        default: "Medium",
         required: [true, "Severity is required"]
     }
 }
@@ -91,7 +91,12 @@ const InterveiwReport = new mongoose.Schema({
     technicalQuestions: [technicalQuestions],
     behaviorQuestions: [behaviorQuestions],
     skillGapSchema: [skillGapSchema],
-    preprationPlan: [preprationPlan]
+    preprationPlan: [preprationPlan],
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
+        required: [true, "User is required"]
+    }
 },
 {
     timestamps:true

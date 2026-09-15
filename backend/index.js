@@ -7,7 +7,7 @@ const connectDB = require("./src/config/database")
 const authRouter = require('./src/routes/auth.route')
 const cookieParser = require("cookie-parser")
 const cors = require("cors");
-
+const interveiwRouter = require('./src/routes/interview.route')
 //Connection of MongoDB
 connectDB();
 
@@ -20,7 +20,7 @@ app.use(cors({
 }))
 // Auth routes
 app.use('/api/auth', authRouter);
-
+app.use('/api/interview', interveiwRouter)
 
 //project start point
 app.listen(port, () => {
