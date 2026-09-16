@@ -2,7 +2,7 @@ import axios from "axios";
 
 //creating instance
 export const api = axios.create({
-    baseURL:  "http://localhost:3000",
+    baseURL: "",
     withCredentials: true
 })
 
@@ -27,25 +27,16 @@ export async function login({email, password}){
     }
 }
 
-//logout
-export async function logout(){
-    try{
-        const response = await api.post("/api/auth/logout");
-        return response.data;
-    }catch (err){
-        console.log(err)
-    }
-}
-
 //get current user
 export async function getCurrentUser(){
-    try{
-        const response = await api.get("/api/auth/get-me");
-        return response.data;
-        
-    } catch (err){
-        console.log(err)
-    }
+    const response = await api.get("/api/auth/get-me");
+    return response.data;
+}
+
+//logout
+export async function logout(){
+    const response = await api.get("/api/auth/logout");
+    return response.data;
 }
 
 //change password

@@ -11,13 +11,11 @@ export const useAuth = () => {
   const context = useContext(AuthContext);
   const { user, setUser, loading, setLoading } = context;
 
-  //Register API
   const handleRegister = async ({ username, email, password }) => {
     setLoading(true);
     try {
       const data = await register({ username, email, password });
-      setUser(data);
-      setLoading(false);
+      setUser(data.user);
     } catch (err) {
       console.log(err);
     } finally {
@@ -30,8 +28,7 @@ export const useAuth = () => {
     setLoading(true);
     try {
       const data = await login({ email, password });
-      setUser(data);
-      setLoading(false);
+      setUser(data.user);
     } catch (err) {
       console.log(err);
     } finally {
@@ -44,33 +41,30 @@ export const useAuth = () => {
     setLoading(true);
     try {
       const data = await getCurrentUser();
-      setUser(data);
-      setLoading(false);
+      setUser(data.user);
     } catch (err) {
       console.log(err);
     } finally {
-      setLoading(false);  
+      setLoading(false);
     }
   };
-//handle logout
+
   const handleLogout = async () => {
     setLoading(true);
     try {
-      const data = await logout();
-      setUser(data);
-      setLoading(false);
+      await logout();
+      setUser(null);
     } catch (err) {
       console.log(err);
     } finally {
       setLoading(false);
     }
   };
-//handle change password
+
   const handleChangePassword = async ({ oldPassword, newPassword }) => {
     setLoading(true);
     try {
-      const data = await login({ oldPassword, newPassword });
-      setUser(data);
+      await changePassword({ oldPassword, newPassword });
     } catch (err) {
       console.log(err);
     } finally {

@@ -48,7 +48,11 @@ const registerUserController = async (req, res) => {
     );
 
     //save the token in the cookie
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "lax",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
 
     res.status(201).json({
       message: "User registered successfully",
@@ -92,7 +96,11 @@ const loginController = async (req, res) => {
       { expiresIn: "1d" },
     );
 
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "lax",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
 
     res.status(200).json({
       message: "User logged in successfully",
@@ -146,7 +154,7 @@ const logoutController = async (req, res) => {
     await tokenBlacklistModel.create({ token });
   }
 
-  res.clearCookie("token");
+  res.clearCookie("token", { httpOnly: true, sameSite: "lax" });
   res.status(200).json({
     message: "User logout successfully",
   });
