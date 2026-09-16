@@ -12,3 +12,42 @@ html,body{
     background: #272626;
     color: white;
 }
+/* =========================================
+   InterviewAI Global Scrollbar
+   ========================================= */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #3f3f46 transparent;
+}
+
+/* Chrome / Edge / Safari */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        #ec4899,
+        #a855f7
+    );
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+        180deg,
+        #f472b6,
+        #c084fc
+    );
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
