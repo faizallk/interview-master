@@ -12,7 +12,7 @@ export const AuthProvider = ({children})=>{
     const getUser = async ()=>{
       try{
         const data = await getCurrentUser();
-        setUser(data.user)
+        setUser(data?.user || null)
       } catch(err){
         setUser(null)
       } finally {

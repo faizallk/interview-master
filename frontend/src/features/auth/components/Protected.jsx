@@ -1,6 +1,6 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-
+import Navbar from "../../../components/Navbar";
 
 export default function Protected({children}) {
  const {loading, user} = useAuth();
@@ -8,7 +8,12 @@ export default function Protected({children}) {
  if(loading) return null;
 
  if(!user){
-    return <Navigate to={'/login'} /> 
+    return <Navigate to={'/login'} />
  }
-  return children
+  return (
+    <>
+      <Navbar />
+      <div className="pt-12">{children}</div>
+    </>
+  )
 }
